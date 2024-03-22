@@ -42,12 +42,12 @@ A comprehensive inventory menu API for Spigot with pages support. Supports Bukki
 
 class MyPlugin extends JavaPlugin {
 
-  public static SpiGUI spiGUI;
+  public static SpiGUI menuAPI;
   
   @Override
   public void onEnable() {
     // (IMPORTANT!) Registers SpiGUI event handlers (and stores plugin-wide settings for SpiGUI.)
-    spiGUI = new SpiGUI(this);
+    menuAPI = new SpiGUI(this);
   }
   
 }
@@ -61,7 +61,7 @@ class MyPlugin extends JavaPlugin {
 public void openMyAwesomeMenu(Player player) {
 
   // Create a GUI with 3 rows (27 slots)
-  SGMenu myAwesomeMenu = MyPlugin.spiGUI.create("&cMy Awesome Menu", 3);
+  SGMenu myAwesomeMenu = MyPlugin.menuAPI.create("&cMy Awesome Menu", 3);
 
   // Create a button
   SGButton myAwesomeButton = new SGButton(

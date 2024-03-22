@@ -1,40 +1,37 @@
 plugins {
     id 'java'
-    id 'maven'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-group 'com.samjakob'
-version '1.2.2-SNAPSHOT'
+group 'xyz.nifti'
+version '1.2.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-
     maven {
-        // Sonatype
-        url "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-
-    maven {
-        // Spigot Nexus
+        name = "spigotmc-repo"
         url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "sonatype"
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
     // Spigot API
-    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
 }
+
 
 task testJar(type: Jar) {
     from sourceSets.main.output.classesDirs
-    from sourceSets.test.output.classesDirs
     from('src/test/resources') {
         include '**'
     }
 
-    archiveBaseName.set("SpiGUITest")
+    archiveBaseName.set("NiftiGUITest")
 }
 
 task sourcesJar(type: Jar) {
@@ -62,4 +59,36 @@ artifacts {
     archives classesJar
     archives javadocJar
     archives sourcesJar
+}
+
+tasks.withType(Zip) { task ->
+    task.doLast {
+        ant.checksum file: it.archivePath
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        myLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        mavenLocal()
+
+        //maven {
+        //    credentials {
+        //        username "$devUser"
+        //        password "$devPassword"
+        //    }
+        //    // url to the releases maven repository
+        //    url "https://${political_repository}/repository/niftiutils/"
+        //}
+    }
 }

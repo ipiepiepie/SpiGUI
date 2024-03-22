@@ -1,7 +1,10 @@
-name: SpiGUITest
+name: NiftiGUI
+description: Fork of SpiGUI for 1.14+ versions. Supports lots of new Minecraft features.
+authors: [ SamJakob, iPiE ]
+
 version: 1.0.0
-main: com.samjakob.spiguitest.SpiGUITest
-author: SamJakob
+main: xyz.nifti.gui.test.NiftiGUITest
+
 commands:
-  spigui:
-    description: Opens a test SpiGUI.
+    spigui:
+      description: Opens a test SpiGUI.
