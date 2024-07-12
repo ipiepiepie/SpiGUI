@@ -20,6 +20,8 @@ import java.util.Map;
  * @see SGMenu Menu
  *
  * @author ipiepiepie
+ *
+ * @version 1.2.0
  */
 @SuppressWarnings("unused")
 public class MenuScheme {
@@ -48,21 +50,25 @@ public class MenuScheme {
         this.page = page;
     }
     
-    /*==============================================================================================*/
+    /*================================================================================================*/
 
     /**
-     * Add row to {@link #mask}. <br>
-     * Row is a string with size 9 (one GUI row).
+     * Add row to {@link #mask}.
+     * <p>
+     * Row is a string with size 9 <i>(one GUI row)</i>.
      *
      * @param mask mask row for adding to {@link #mask}
      * @return MenuScheme builder
      */
     public MenuScheme mask(String mask) {
+        // skip incorrect mask length
         if (mask.length() != 9)
             throw new IllegalArgumentException("Mask size must be 9!");
 
+        // get characters array from the provided mask row
         char[] chars = mask.replaceAll(" ", "").toCharArray();
 
+        // add chars to the mask
         getMask().add(chars);
 
         return this;
@@ -143,11 +149,12 @@ public class MenuScheme {
             for (int pos = 0; pos < mask.length; pos++) {
                 char marker = mask[pos]; // Get marker from mask
 
-                // Skip this marker, if It's empty or not registered
+                // Skip this marker, if it's empty or not registered
                 if (marker == getEmptyMarker() || !hasMarker(marker))
                     continue;
 
                 int slot = row * 9 + pos;
+                // set marker button
                 menu.setButton(slot + (getMask().size() * 9 * page), getMarker(marker));
 
                 // set slot editable if needed
@@ -160,6 +167,7 @@ public class MenuScheme {
         }
     }
 
+    /*================================================================================================*/
 
     /// MARKER METHODS ///
 
@@ -213,4 +221,7 @@ public class MenuScheme {
     public boolean isStick() {
         return stick;
     }
+
+    /*================================================================================================*/
+
 }

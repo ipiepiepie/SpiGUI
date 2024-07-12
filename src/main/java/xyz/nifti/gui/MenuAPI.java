@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fork of comprehensive GUI API for Spigot with pages support.<br>
+ * Fork of comprehensive GUI API for Spigot with pages support.
+ * <p>
  * Original: <a href="https://github.com/SamJakob/SpiGUI">https://github.com/SamJakob/SpiGUI</a><br>
  * Fork: TODO add github repo link
  *
- * @author SamJakob, iPiE
+ * @author SamJakob, ipiepiepie
  * @version 1.2.4
  */
 public class MenuAPI {

@@ -12,6 +12,13 @@ import org.bukkit.inventory.meta.SkullMeta;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Asynchronous realisation of {@link ItemBuilder}.
+ *
+ * @author ipiepiepie
+ * @version 1.2.0
+ * @see ItemBuilder
+ */
 public class AsyncItemBuilder {
     private Material material;
     private int amount = 1;
