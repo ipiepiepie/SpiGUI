@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'xyz.nifti'
-version '1.2.0-SNAPSHOT'
+version '1.2.4-SNAPSHOT'
 
 repositories {
     mavenCentral()
