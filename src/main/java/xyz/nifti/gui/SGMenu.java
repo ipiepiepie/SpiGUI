@@ -50,6 +50,7 @@ public class SGMenu implements InventoryHolder {
 
     private final Map<Integer, SGButton> items;
     private final HashSet<Integer> stickiedSlots;
+    private final HashSet<Integer> editableSlots;
 
     private int currentPage;
     private Boolean blockDefaultInteractions;
@@ -81,6 +82,7 @@ public class SGMenu implements InventoryHolder {
 
         this.items = new HashMap<>();
         this.stickiedSlots = new HashSet<>();
+        this.editableSlots = new HashSet<>();
 
         this.currentPage = 0;
     }
@@ -622,6 +624,50 @@ public class SGMenu implements InventoryHolder {
     public void clearAllButStickiedSlots() {
         this.currentPage = 0;
         items.entrySet().removeIf(item -> !isStickiedSlot(item.getKey()));
+    }
+
+    /// EDITABLE SLOTS ///
+
+    /**
+     * Marks a slot as 'editable', so it can be edited by player.
+     * <p>
+     * If the slot is out of the bounds of the first page (i.e. less
+     * than 0 or greater than {@link #getPageSize()} - 1) this method
+     * will do nothing.
+     *
+     * @param slot The slot to mark as 'editable'.
+     */
+    public void editableSlot(int slot) {
+        if (slot < 0 || slot >= getPageSize()) return;
+
+        this.editableSlots.add(slot);
+    }
+
+    /**
+     * Un-marks a slot as editable.
+     *
+     * @see #editableSlot(int)
+     * @param slot The slot to un-mark as 'editable'.
+     */
+    public void uneditableSlot(int slot) {
+        this.editableSlots.remove(slot);
+    }
+
+    /**
+     * This checks whether a given slot is editable.
+     * <p>
+     * If the slot is out of bounds of the first page (as defined by
+     * the same parameters as {@link #editableSlot(int)}), this will return
+     * false.
+     *
+     * @see #editableSlot(int)
+     * @param slot The slot to check.
+     * @return True if the slot is editable, false if it isn't or the slot was out of bounds.
+     */
+    public boolean isEditableSlot(int slot) {
+        if (slot < 0 || slot >= getPageSize()) return false;
+
+        return this.editableSlots.contains(slot);
     }
 
     /// EVENTS ///

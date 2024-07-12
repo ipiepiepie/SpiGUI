@@ -28,6 +28,7 @@ public class MenuScheme {
     private boolean stick = false;
     // markers //
     private final Map<Character, SGButton> markers = new HashMap<>();
+    private Character editableMarker = null;
     private char emptyMarker = '0';
     
     
@@ -76,6 +77,18 @@ public class MenuScheme {
      */
     public MenuScheme emptyMarker(char marker) {
         this.emptyMarker = marker;
+        return this;
+    }
+
+    /**
+     * Set {@link #getEditableMarker() Editable Marker} char.
+     * <p>
+     * Editable marker chars will be ued, to determine which slots can be {@link SGMenu#editableSlot(int) edited}.
+     * @param marker marker, represents editable marker
+     * @return MenuScheme builder
+     */
+    public MenuScheme editableMarker(char marker) {
+        this.editableMarker = marker;
         return this;
     }
 
@@ -136,6 +149,12 @@ public class MenuScheme {
 
                 int slot = row * 9 + pos;
                 menu.setButton(slot + (getMask().size() * 9 * page), getMarker(marker));
+
+                // set slot editable if needed
+                if (hasEditableMarker() && marker == getEditableMarker())
+                    menu.editableSlot(slot);
+
+                // set slot sticky if needed
                 if (isStick()) menu.stickSlot(slot);
             }
         }
@@ -161,6 +180,21 @@ public class MenuScheme {
     public void setEmptyMarker(char empty) {
         this.emptyMarker = empty;
     }
+
+    /// EDITABLE MARKER METHODS ///
+
+    public boolean hasEditableMarker() {
+        return editableMarker != null;
+    }
+
+    public Character getEditableMarker() {
+        return editableMarker;
+    }
+
+    public void setEditableMarker(Character editableMarker) {
+        this.editableMarker = editableMarker;
+    }
+
 
     /// MASK METHODS ///
 
