@@ -319,9 +319,8 @@ public class MenuAPI {
             Inventory topInventory = player.getOpenInventory().getTopInventory();
 
             // If the top inventory is an SGMenu,
-            if (topInventory.getHolder() != null && topInventory.getHolder() instanceof SGMenu) {
+            if (topInventory.getHolder() != null && topInventory.getHolder() instanceof SGMenu inventory) {
                 // and the SGMenu has the tag matching the one we're checking for,
-                SGMenu inventory = (SGMenu) topInventory.getHolder();
                 if (inventory.getTag().equals(tag))
                     // add the SGMenu to our list of found inventories.
                     foundInventories.add(new SGOpenMenu(inventory, player));
