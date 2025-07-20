@@ -147,19 +147,21 @@ public class MenuScheme {
 
             // Iterate over mask markers
             for (int pos = 0; pos < mask.length; pos++) {
-                char marker = mask[pos]; // Get marker from mask
+                // get marker position
+                int slot = row * 9 + pos;
+                // get marker from mask
+                char marker = mask[pos];
+
+                // set slot editable if needed
+                if (hasEditableMarker() && marker == getEditableMarker())
+                    menu.editableSlot(slot);
 
                 // Skip this marker, if it's empty or not registered
                 if (marker == getEmptyMarker() || !hasMarker(marker))
                     continue;
 
-                int slot = row * 9 + pos;
                 // set marker button
                 menu.setButton(slot + (getMask().size() * 9 * page), getMarker(marker));
-
-                // set slot editable if needed
-                if (hasEditableMarker() && marker == getEditableMarker())
-                    menu.editableSlot(slot);
 
                 // set slot sticky if needed
                 if (isStick()) menu.stickSlot(slot);

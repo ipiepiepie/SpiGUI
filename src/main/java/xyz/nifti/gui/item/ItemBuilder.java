@@ -22,8 +22,8 @@ import java.util.function.Predicate;
  * <p>
  * The class wraps an ItemStack object and provides convenient chainable, 'builder-pattern' methods for
  * manipulating the stack's metadata.
- *
- * @apiNote The intention is that this class will be used in builder form - for example;
+ * <p>
+ * The intention is that this class will be used in builder form - for example;
  * <pre>
  * new ItemBuilder(Material.SPONGE).name("&amp;cAlmighty sponge").amount(21).build();
  * </pre>
